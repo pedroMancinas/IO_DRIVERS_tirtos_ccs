@@ -42,6 +42,7 @@ static const uint32_t GPIO_PORT_TO_BASE[] =
 DECLARACION DE APUNTADORES PARA ACCESO A MEMORIA PARA LA FUNCION Gpio_Pin_in
  ************************************************/
   volatile uint8_t *const p1_in  = (uint8_t*)0x040004c00;
+  volatile uint8_t *const p2_in  = (uint8_t*)0x040004c01;
 
 /***************************************************************************************
  *
@@ -58,8 +59,20 @@ DECLARACION DE APUNTADORES PARA ACCESO A MEMORIA PARA LA FUNCION Gpio_Pin_in
 ******************************************************************************/
 uint8_t Gpio_Pin_in( uint_fast16_t pin_)
 {
+
         uint_fast16_t inputPinValue;
         inputPinValue = *p1_in & (pin_);        // LEE EL REGISTRO QUE INDICA EL VALOR DE ENTRADA DE UN PIN
+
+        if (inputPinValue > 0)                  // RETORNA EL VALOR 1 o 0
+            return (0x01);
+        return (0x00);
+}
+
+//Ejercicio 8
+uint8_t Gpio_Pin2_in( uint_fast16_t pin_)
+{
+        uint_fast16_t inputPinValue;
+        inputPinValue = *p2_in & (pin_);        // LEE EL REGISTRO QUE INDICA EL VALOR DE ENTRADA DE UN PIN
 
         if (inputPinValue > 0)                  // RETORNA EL VALOR 1 o 0
             return (0x01);

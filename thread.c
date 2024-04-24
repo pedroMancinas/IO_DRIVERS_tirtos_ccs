@@ -83,10 +83,11 @@ void *mainThread(void *arg0)
     GPIO_setPinSalida(PUERTO1, LEDROJO);                          // Set P1.0 COMO SALIDA  "ESTO UTILIZA EL DRIVER DECLARADO EN BSP.h"
     GPIO_setPinSalida(PUERTO2, LEDROJO | LEDVERDE |LEDAZUL);   // CONFIGURA PINES 2.0,2.1,2.2  COMO SALIDA (LEDS RGB)"
     GPIO_setPinBajo(PUERTO2,   LEDROJO | LEDVERDE |LEDAZUL);      // APAGADOS
+
     while (1)
     {
         GPIO_setPinAlto(PUERTO1, LEDROJO | LEDVERDE |LEDAZUL);
-        if ( Gpio_Pin_in(BOTON2) != 1)                            // ENTRA AL PRESIONAR EL SWITCH DEL PUERTO P1.4 (CUANDO ESTA EN BAJO)
+        if ( Gpio_Pin2_in(BOTON3) != 1)                            // ENTRA AL PRESIONAR EL SWITCH DEL PUERTO P1.4 (CUANDO ESTA EN BAJO)
         {
             GPIO_setPinBajo(PUERTO1, LEDROJO);
             if(bandera == FALSE)
@@ -101,12 +102,12 @@ void *mainThread(void *arg0)
                     GPIO_setPinAlto(PUERTO2, LEDVERDE);    //ENCIENDE GREEN
                     usleep(time);       // delay de 1 segundo
 
-                    GPIO_setPinBajo(PUERTO2, LEDVERDE);    //APAGA GREEN
+                    GPIO_setPinBajo(PUERTO2,  LEDVERDE);    //APAGA GREEN
                     GPIO_setPinAlto(PUERTO2,  LEDAZUL);    //ENCIENDE BLUE
                     usleep(time);       // delay de 1 segundo
 
-                    if ( Gpio_Pin_in(BOTON2) != 1) bandera=FALSE;    // ENTRA CUANDO PRESIONAMOS BOTON DE P1.4
-                    while( Gpio_Pin_in(BOTON2) != 1);                //MIENTRAS ESTE PRESIONADO EL BOTON
+                    if ( Gpio_Pin2_in(BOTON3) != 1) bandera=FALSE;    // ENTRA CUANDO PRESIONAMOS BOTON DE P1.4
+                    while( Gpio_Pin2_in(BOTON3) != 1);                //MIENTRAS ESTE PRESIONADO EL BOTON
                 }
             }
             GPIO_setPinBajo(PUERTO2,   LEDROJO | LEDVERDE |LEDAZUL);  //APAGA TODOS
