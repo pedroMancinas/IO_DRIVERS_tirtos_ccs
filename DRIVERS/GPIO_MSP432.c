@@ -20,6 +20,7 @@
  *************************************************************************************************/
 #include "GPIO_MSP432.h"     // Configuración del sistema.
 
+
 /* Declaración del arreglo GPIO_PORT_TO_BASE
  * En el cual se encuentran las direcciones en donde comienzan
  * los registros de control para cada puerto.                   */
@@ -78,6 +79,16 @@ uint8_t Gpio_Pin2_in( uint_fast16_t pin_)
             return (0x01);
         return (0x00);
 }
+
+//Ejercicio 9
+void Gpio_init2021(){
+    GPIO_setPinEntradaconPullUp(PUERTO1,BOTON2);                 //PIN P1.4 COMO ENTRADA
+    GPIO_setPinSalida(PUERTO1, LEDROJO);                          // Set P1.0 COMO SALIDA  "ESTO UTILIZA EL DRIVER DECLARADO EN BSP.h"
+    GPIO_setPinSalida(PUERTO2, LEDROJO | LEDVERDE |LEDAZUL);   // CONFIGURA PINES 2.0,2.1,2.2  COMO SALIDA (LEDS RGB)"
+    GPIO_setPinBajo(PUERTO2,   LEDROJO | LEDVERDE |LEDAZUL);      // APAGADOS
+
+}
+
 
 
 /******************************************************************************
